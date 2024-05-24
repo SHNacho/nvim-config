@@ -1,5 +1,5 @@
 ## Directory structure
-
+```
 ~/.config/nvim/
 ├── init.lua
 └── lua/
@@ -12,6 +12,7 @@
     └── plugins/
         ├── treesitter.lua
         └── ...
+```
 
 1. init.lua: The main configuration file that sources all other configuration files.
 2. lua/: Directory containing all Lua configuration scripts.
