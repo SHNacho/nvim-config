@@ -11,8 +11,34 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 -- Example: Setup for `pyright`
+-- Function to get the Python interpreter from the virtual environment
+local function get_python_path()
+  -- Use activated virtualenv.
+  if vim.env.VIRTUAL_ENV then
+    return vim.env.VIRTUAL_ENV .. '/bin/python'
+  end
+  -- Find and use virtualenv in workspace directory.
+  for _, pattern in ipairs({'venv', '.venv'}) do
+    local match = vim.fn.glob(vim.fn.getcwd() .. '/' .. pattern)
+    if match ~= '' then
+      return match .. '/bin/python'
+    end
+  end
+  -- Fallback to system Python.
+  return '/usr/bin/python'
+end
+
 lspconfig.pyright.setup {
-  capabilities = capabilities,
+	capabilities = capabilities,
+	settings = {
+		python = {
+			pythonPath = get_python_path(),
+			analysis = {
+				typeCheckingMode = "off",
+            	reportUnusedExpression = false
+		  	}
+	  	}
+  	}
 }
 
 -- Setup for texlab

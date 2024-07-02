@@ -7,5 +7,8 @@ require('plugins.lualine')
 require('plugins.treesitter')
 require('plugins.dap')
 require('plugins.autopairs')
+require('plugins.comment')
+require('plugins.surround')
+require('plugins.bufferline')
 require('lsp')
 

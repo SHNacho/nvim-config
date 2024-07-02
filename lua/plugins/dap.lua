@@ -1,6 +1,23 @@
 local dap = require('dap')
 local dapui = require('dapui')
 
+-- Function to get the Python interpreter from the virtual environment
+local function get_python_path()
+  -- Use activated virtualenv.
+  if vim.env.VIRTUAL_ENV then
+    return vim.env.VIRTUAL_ENV .. '/bin/python'
+  end
+  -- Find and use virtualenv in workspace directory.
+  for _, pattern in ipairs({'venv', '.venv'}) do
+    local match = vim.fn.glob(vim.fn.getcwd() .. '/' .. pattern)
+    if match ~= '' then
+      return match .. '/bin/python'
+    end
+  end
+  -- Fallback to system Python.
+  return '/usr/bin/python'
+end
+
 -- Define DAP adapter for Python
 dap.adapters.python = {
   type = 'executable',
@@ -16,9 +33,8 @@ dap.configurations.python = {
     request = 'launch',
     name = 'Launch file',
     program = '${file}',
-    pythonPath = function()
-      return '${workspaceFolder}/.venv/bin/python' -- Modify as needed
-    end,
+	cwd = '${workspaceFolder}',
+    pythonPath = get_python_path()
   },
   {
     -- Configuration 2: Launch with arguments
@@ -30,9 +46,7 @@ dap.configurations.python = {
       local input = vim.fn.input('Arguments: ')
       return vim.split(input, ' ')
     end,
-    pythonPath = function()
-      return '/usr/bin/python' -- Modify as needed
-    end,
+    pythonPath = get_python_path()
   },
   {
     -- Configuration 3: Debug FastAPI
@@ -43,15 +57,13 @@ dap.configurations.python = {
 	args = {'app.main:app', '--host', '127.0.0.1', '--port', '8000'},
     justMyCode = false, -- Set to false to debug third-party code if needed
 	cwd = '${workspaceFolder}',
-    pythonPath = function()
-      return '${workspaceFolder}/venv/bin/python' -- Modify as needed
-    end,
+    pythonPath = get_python_path()
   },
 }
 
 -- UI setup
 dapui.setup()
-require('nvim-dap-virtual-text').setup()
+-- require('nvim-dap-virtual-text').setup()
 
 -- Automatically open/close dapui
 dap.listeners.after.event_initialized['dapui_config'] = function()

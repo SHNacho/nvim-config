@@ -15,3 +15,9 @@ vim.api.nvim_set_hl(0, 'Pmenu', { fg = '#c5c8c6', bg = '#1e1e1e' })          -- 
 vim.api.nvim_set_hl(0, 'PmenuSel', { fg = '#ffffff', bg = '#005f87' })       -- Selected item background and foreground
 vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = '#3e4451' })                      -- Scrollbar background
 vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#61afef' })
+
+-- Theme
+vim.cmd.colorscheme "catppuccin-mocha"
+
+-- Troubles
+vim.cmd [[autocmd! CursorHold * lua vim.diagnostic.config({ virtual_lines = { only_current_line = true } })]]
