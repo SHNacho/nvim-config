@@ -34,7 +34,8 @@ dap.configurations.python = {
     name = 'Launch file',
     program = '${file}',
 	cwd = '${workspaceFolder}',
-    pythonPath = get_python_path()
+    pythonPath = get_python_path(),
+	env = { PYTHONPATH = "${workspaceFolder}" } -- Add workspace to PYTHONPATH
   },
   {
     -- Configuration 2: Launch with arguments

@@ -1,5 +1,7 @@
 vim.cmd [[packadd packer.nvim]]
 
+local vscode = vim.g.vscode == 1
+
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'  -- Packer can manage itself
 
@@ -10,7 +12,7 @@ return require('packer').startup(function(use)
   	}
 
 	-- LSP
-  	use 'neovim/nvim-lspconfig'  -- Configurations for Nvim LSP
+  	use {'neovim/nvim-lspconfig'}  -- Configurations for Nvim LSP
 	-- Treesitter
 	use {
   		"nvim-neo-tree/neo-tree.nvim",
@@ -20,26 +22,31 @@ return require('packer').startup(function(use)
       		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       		"MunifTanjim/nui.nvim",
       		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    	}
+    	},
+		disable = vscode
   	}
 	-- Telescope
 	use {
   		'nvim-telescope/telescope.nvim' , branch = '0.1.x',
-  		requires = { {'nvim-lua/plenary.nvim'} }
+  		requires = { {'nvim-lua/plenary.nvim'} },
+		disable = vscode
 	}
 	-- Lualine
  	use {
   		'nvim-lualine/lualine.nvim',
-  		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  		requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+		disable = vscode
 	}
 	-- Autopairs
-	use {"windwp/nvim-autopairs"}
+	use {"windwp/nvim-autopairs", disable = vscode}
 	use({
   		"kylechui/nvim-surround",
     	tag = "*",         	
+		disable = vscode
 	})
+	use 'Vimjas/vim-python-pep8-indent'
 	-- bufferline
-	use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+	use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons', disable = vscode}
 	-- CMP
 	use {
   		'hrsh7th/nvim-cmp',
@@ -52,14 +59,14 @@ return require('packer').startup(function(use)
   		}
 	}
 	-- DAP
-	use "nvim-neotest/nvim-nio" 
-	use 'mfussenegger/nvim-dap'
-	use 'rcarriga/nvim-dap-ui'
-	use 'theHamsta/nvim-dap-virtual-text'
-	use 'lervag/vimtex'
+	use {"nvim-neotest/nvim-nio", disable = vscode} 
+	use {'mfussenegger/nvim-dap', disable = vscode}
+	use {'rcarriga/nvim-dap-ui', disable = vscode}
+	use {'theHamsta/nvim-dap-virtual-text', disable = vscode}
+	use {'lervag/vimtex', disable = vscode}
 	-- Comments
-	use 'terrortylor/nvim-comment'
+	use {'terrortylor/nvim-comment', disable = vscode}
 	-- Themes
-	use { "catppuccin/nvim", as = "catppuccin" }
+	use { "catppuccin/nvim", as = "catppuccin", disable = vscode }
 end)
 

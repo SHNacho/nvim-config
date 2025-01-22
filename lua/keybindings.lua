@@ -18,7 +18,7 @@ map('n', '<C-k>', '<C-w>k', opts)
 map('n', '<C-l>', '<C-w>l', opts)
 
 -- Move between buffers
-map('n', '<C-Tab>', ':b#<CR>', opts)
+map('n', '<leader>bt', ':b#<CR>', opts) -- Go to the last buffer
 map('n', '<leader>bn', ':bnext<CR>', opts)
 map('n', '<leader>bp', ':bprev<CR>', opts)
 

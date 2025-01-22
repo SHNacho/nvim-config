@@ -2,7 +2,7 @@ local lspconfig = require('lspconfig')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
 -- Enable the following language servers
-local servers = { 'pyright', 'texlab' }
+local servers = { 'pyright' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {}
 end
@@ -35,35 +35,10 @@ lspconfig.pyright.setup {
 			pythonPath = get_python_path(),
 			analysis = {
 				typeCheckingMode = "off",
-            	reportUnusedExpression = false
+				autoSearchPaths = true,
+            	reportUnusedExpression = false,
+				diagnosticMode = "workspace",
 		  	}
 	  	}
   	}
-}
-
--- Setup for texlab
-lspconfig.texlab.setup {
-  capabilities = capabilities,
-  settings = {
-    texlab = {
-	  rootDirectory="./",
-	  diagnosticsDelay=1000,
-      build = {
-        executable = "latexmk",
-        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-        onSave = true
-      },
-      forwardSearch = {
-        executable = "zathura",
-        args = { "--synctex-forward", "%l:1:%f", "%p" }
-      },
-      chktex = {
-        onOpenAndSave = false,
-        onEdit = false 
-      },
-      lint = {
-        onChange = false 
-      }
-    }
-  }
 }
