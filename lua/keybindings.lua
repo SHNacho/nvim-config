@@ -11,6 +11,10 @@ map('n', '<F2>', ':Neotree toggle<CR>', opts)
 map('n', '<leader>ff', ':Telescope find_files<CR>', opts)
 map('n', '<leader>fg', ':Telescope live_grep<CR>', opts)
 
+-- Git
+-- Gitsigns
+map('n', '<leader>gp', ':Gitsigns preview_hunk_inline<CR>', opts)
+
 -- Move between splits
 map('n', '<C-h>', '<C-w>h', opts)
 map('n', '<C-j>', '<C-w>j', opts)

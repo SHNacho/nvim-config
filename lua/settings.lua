@@ -20,4 +20,12 @@ vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#61afef' })
 vim.cmd.colorscheme "catppuccin-mocha"
 
 -- Troubles
-vim.cmd [[autocmd! CursorHold * lua vim.diagnostic.config({ virtual_lines = { only_current_line = true } })]]
+-- vim.cmd [[autocmd! CursorHold * lua vim.diagnostic.config({ virtual_lines = { only_current_line = true } })]]
+
+-- Open neo-tree when nvim starts
+    vim.api.nvim_create_autocmd("VimEnter", {
+      command = "set nornu nonu | Neotree toggle",
+    })
+    vim.api.nvim_create_autocmd("BufEnter", {
+      command = "set rnu nu",
+    })
