@@ -6,6 +6,11 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'  -- Packer can manage itself
 
 	-- Add your plugins here
+	-- Tmux navigator
+	use {
+		'christoomey/vim-tmux-navigator'
+	}
+
 	-- Treesitter
 	use {
 		'nvim-treesitter/nvim-treesitter',

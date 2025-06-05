@@ -16,10 +16,16 @@ map('n', '<leader>fg', ':Telescope live_grep<CR>', opts)
 map('n', '<leader>gp', ':Gitsigns preview_hunk_inline<CR>', opts)
 
 -- Move between splits
-map('n', '<C-h>', '<C-w>h', opts)
-map('n', '<C-j>', '<C-w>j', opts)
-map('n', '<C-k>', '<C-w>k', opts)
-map('n', '<C-l>', '<C-w>l', opts)
+-- With Tmux
+map('n', '<C-h>', ':TmuxNavigateLeft<CR>', opts)
+map('n', '<C-j>', ':TmuxNavigateDown<CR>', opts)
+map('n', '<C-k>', ':TmuxNavigateUp<CR>', opts)
+map('n', '<C-l>', ':TmuxNavigateRight<CR>', opts)
+-- Without Tmux
+-- map('n', '<C-h>', '<C-w>h', opts)
+-- map('n', '<C-j>', '<C-w>j', opts)
+-- map('n', '<C-k>', '<C-w>k', opts)
+-- map('n', '<C-l>', '<C-w>l', opts)
 
 -- Move between buffers
 map('n', '<leader>bt', ':b#<CR>', opts) -- Go to the last buffer
